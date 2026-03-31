@@ -5,7 +5,6 @@ rustflags = [
   
   "-C", "llvm-args=-align-all-functions=5",
   "-C", "llvm-args=-align-all-blocks=5",
-  "-C", "llvm-args=-align-all-loops=5",
   
   "-C", "inline-threshold=100",
   "-C", "llvm-args=-unroll-threshold=300",
@@ -15,10 +14,6 @@ rustflags = [
   "-C", "llvm-args=-vectorize-loops",
   "-C", "llvm-args=-vectorize-slp",
   
-  "-C", "llvm-args=-polly",
-  "-C", "llvm-args=-polly-position=early",
-  "-C", "llvm-args=-polly-vectorizer=stripmine",
-  "-C", "llvm-args=-polly-run-inliner",
 ]
 [profile.release]
 opt-level = 3
