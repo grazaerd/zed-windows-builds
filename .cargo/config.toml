@@ -3,16 +3,22 @@ rustflags = [
   "-C", "target-cpu=znver3",
   "-C", "target-feature=+avx2,+fma,+bmi1,+bmi2,+lzcnt,+popcnt",
   
+  "-C", "llvm-args=-align-all-functions=5",
+  "-C", "llvm-args=-align-all-blocks=5",
+  "-C", "llvm-args=-align-all-loops=5",
+  
   "-C", "inline-threshold=100",
   "-C", "llvm-args=-unroll-threshold=300",
-  
+  "-C", "llvm-args=-enable-unroll-and-jam",
   "-C", "llvm-args=-enable-loopinterchange",
   "-C", "llvm-args=-enable-loop-distribute",
   "-C", "llvm-args=-vectorize-loops",
   "-C", "llvm-args=-vectorize-slp",
   
   "-C", "llvm-args=-polly",
+  "-C", "llvm-args=-polly-position=early",
   "-C", "llvm-args=-polly-vectorizer=stripmine",
+  "-C", "llvm-args=-polly-run-inliner",
 ]
 [profile.release]
 opt-level = 3
