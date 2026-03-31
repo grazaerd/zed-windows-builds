@@ -1,8 +1,25 @@
 [target."cfg(all())"]
-rustflags = []
+rustflags = [
+  "-C", "target-cpu=znver3",
+  "-C", "target-feature=+avx2,+fma,+bmi1,+bmi2,+lzcnt,+popcnt",
+  
+  "-C", "inline-threshold=100",
+  "-C", "llvm-args=-unroll-threshold=300",
+  
+  "-C", "llvm-args=-enable-loopinterchange",
+  "-C", "llvm-args=-enable-loop-distribute",
+  "-C", "llvm-args=-vectorize-loops",
+  "-C", "llvm-args=-vectorize-slp",
+  
+  "-C", "llvm-args=-polly",
+  "-C", "llvm-args=-polly-vectorizer=stripmine",
+]
 [profile.release]
-debug = false
-strip = true
+opt-level = 3
+lto = "fat"
 codegen-units = 1
-lto = true
 panic = "abort"
+strip = true
+debug = false
+overflow-checks = false
+incremental = false
